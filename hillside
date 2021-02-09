@@ -1,0 +1,150 @@
+
+require 'csv'
+
+csv_text = File.read(‘/Users/henryjackson/downloads/hillside-community-church-export-797425.csv’)
+
+csv = CSV.parse(csv_text, :headers => true)
+csv.each do |row|
+  csv_load = Person.new
+    csv_hash = row.to_hash
+    csv_load.person_id = csv_hash['Person ID']
+    csv_load.name_prefix = csv_hash['Name Prefix']
+    csv_load.given_name = csv_hash['Given Name']
+    csv_load.first_name = csv_hash['First Name']
+    csv_load.nick_name = csv_hash['Nickname']
+    csv_load.middle_name = csv_hash['Middle Name']
+    csv_load.last_name = csv_hash['Last Name']
+    csv_load.name_suffix = csv_hash['Name Suffix']
+    csv_load.birth_date = csv_hash['Birthdate']
+    csv_load.anniversary = csv_hash['Anniversary']
+    csv_load.gender = csv_hash['Gender']
+    csv_load.grade = csv_hash['Grade']
+
+    csv_load.school = csv_hash['School']
+
+    csv_load.medical_notes = row['Medical Notes']
+    csv_load.child = row['Child']
+
+    csv_load.marital_notes = row['Marital Status']
+    csv_load.status = row['Status']
+    csv_load.membership = row['Membership']
+    csv_load.inactive_reason = row['Inactive Reason']
+    csv_load.inactive_date = row['Inactive Date']
+    csv_load.campus_name = row['Campus Name']
+    csv_load.group_user = row['Group User']
+    csv_load.home_address_street_line_1 = row['Home Address Street Line 1']
+
+    csv_load.home_address_street_line_2 = row['Home Address Street Line 2']
+
+    csv_load.home_address_city = row['Home Address City']
+    csv_load.home_address_state = row['Home Address State']
+    csv_load.home_address_zip_code = row['Home Address Zip Code']
+
+    csv_load.work_address_street_line_1 = row['Work Address Street Line 1']
+
+    csv_load.work_address_street_line_2 = row['Work Address Street Line 2']
+
+    csv_load.work_address_city = row['Work Address City']
+    csv_load.work_address_state = row['Work Address State']
+    csv_load.work_address_zip_code = row['Work Address Zip Code']
+
+    csv_load.other_address_street_line_1 = row['Other Address Street Line 1']
+
+    csv_load.other_address_street_line_2 = row['Other Address Street Line 2']
+
+    csv_load.other_address_city = row['other_address_city']
+    csv_load.other_address_state = row['Other Address State']
+
+    csv_load.other_address_zip_code = row['Other Address Zip Code']
+
+    csv_load.mobile_phone_number = row['Mobile Phone Number']
+    csv_load.home_phone_number = row['Home Phone Number']
+    csv_load.work_phone_number = row['Work Phone Number']
+    csv_load.pager_phone_number = row['Pager Phone Number']
+    csv_load.fax_phone_number = row['Fax Phone Number']
+    csv_load.skype_phone_number = row['Skype Phone Number']
+    csv_load.other_phone_number = row['Other Phone Number']
+    csv_load.home_email = row['Home Email']
+    csv_load.work_email = row['Work Email']
+    csv_load.other_email = row['Other Email']
+    csv_load.household_id = row['Household Id']
+    csv_load.household_name = row['Household Name']
+    csv_load.household_primary_contact = row['Household Primary Contact']
+
+    csv_load.baptism_date = row['Baptism::Baptism Date']
+    csv_load.pastor_baptizer = row['Baptism::Pastor/Baptizer']
+    csv_load.baptism_referral = row['Baptism::Baptism Referral']
+    csv_load.baptism_attended_class = row['Baptism::Baptism Attended Class']
+    csv_load.baptism_campus = row['Baptism::Baptism Campus']
+    csv_load.first_time_guests = row['First Time Guests::First Time Guests']
+    csv_load.first_time_kids_checkin = row['First Time Guests::First Time Kids Checkin']
+
+    csv_load.first_time_gathering_time = row['First Time Guests::Gathering Time']
+
+    csv_load.first_time_how_did_you_hear = row['First Time Guests::How did you hear about Hillside?']
+
+    csv_load.first_time_meet_the_staff = row['First Time Guests::First time Meet the Staff']
+
+    csv_load.fontana_launch_commitment = row['Fontana::Launch Commitment']
+
+    csv_load.fontana_email_list = row['Fontana::Email List']
+
+    csv_load.i_believe_ministry = row['I Believe::Ministry']
+    csv_load.i_believe_date = row['I Believe::Date']
+
+    csv_load.integration_meet_the_family = row['Integration::Meet The Family']
+
+    csv_load.integration_next_step_2 = row['Integration::Next Step2']
+
+    csv_load.integration_next_step_3 = row['Integration::Next Step 3']
+
+    csv_load.ministry_young_adults = row['Ministry::Young Adults']
+
+    csv_load.ministry_arts_academy = row['Ministry::Arts Academy']
+
+    csv_load.ministry_senior_adult = row['Ministry::Senior Adult']
+
+    csv_load.missions_teams_india = row['Missions Teams::india']
+    csv_load.missions_teams_kenya = row['Missions Teams::Kenya']
+
+    csv_load.missions_teams_mexico = row['Missions Teams::Mexico']
+
+    csv_load.missions_teams_rainbow_acres = row['Missions Teams::Rainbow Acres']
+
+    csv_load.prayer_team_6am = row['Prayer Team::6am Prayer']
+    csv_load.prayer_team_india = row['Prayer Team::India Prayer Team']
+    csv_load.prayer_team_africa = row['Prayer Team::Africa Prayer Team']
+    csv_load.prayer_team_easter = row['Prayer Team::Easter Prayer']
+
+    csv_load.spirtual_formation_community_host_groups = row['Spiritual Formations::Community Groups Facilitator/Host']
+
+    csv_load.spritual_formation_participant = row['Spiritual Formations::Community Groups Participant']
+
+    csv_load.spirtual_formation_rooted_participant = row['Spiritual Formations::Rooted Participant(most recent date)']
+
+    csv_load.spritual_formation_rooted_facliltator = row['Spiritual Formations::Rooted Facilitator(most recent date)']
+
+    csv_load.spirtual_formation_story_facliltator = row['Spiritual Formations::The Story Facilitator(most recent date)']
+
+    csv_load.spirtual_formation_story_participant = row['Spiritual Formations::The Story Participant(most recent date)']
+
+    csv_load.spirtual_formation_the_story = row['Spiritual Formations::The Story']
+
+
+    csv_load.volunteer_care_ministry = row['Volunteer::Care Ministry']
+
+    csv_load.volunteer_guest_experience = row['Volunteer::Guest Experience']
+
+    csv_load.launch_2020_commit_to_pray = row['Launch 2020::Commit To Pray']
+
+    csv_load.launch_2020_commit_to_generosity = row['Launch 2020::Commit To Generosity by']
+
+    csv_load.covid_19_made_contact = row['Covid-19::Made Contact']
+
+    csv_load.covid_19_left_voicemail = row['Covid-19::Left Voicemail']
+
+    csv_load.covid_19_status_during_pandemic = row['Covid-19::Status During Pandemic']
+
+    csv_load.covid_19_follow_up_needed = row['Covid-19::Follow Up Needed?'']
+csv_load.save
+end
