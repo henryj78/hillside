@@ -10,10 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_204529) do
+ActiveRecord::Schema.define(version: 2021_03_02_193608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "events", force: :cascade do |t|
+    t.string "event_type"
+    t.string "event_id"
+    t.string "event_attributes_canceled"
+    t.string "event_attributes_canceled_at"
+    t.string "event_attributes_ends_at"
+    t.string "ea_location_type"
+    t.string "ea_multi_day"
+    t.string "ea_name"
+    t.string "ea_starts_at"
+    t.string "ea_virtual_location"
+    t.string "ras_type"
+    t.string "ras_id"
+    t.string "rl_type"
+    t.string "rl_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "group_type"
+    t.string "group_id"
+    t.string "location_type"
+    t.string "location_id"
+  end
 
   create_table "people", force: :cascade do |t|
     t.string "person_id"
