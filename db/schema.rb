@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_193608) do
+ActiveRecord::Schema.define(version: 2021_03_04_223335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attendances", force: :cascade do |t|
+    t.string "a_type"
+    t.string "a_id"
+    t.string "atended"
+    t.string "role"
+    t.string "person_type"
+    t.string "person_id"
+    t.string "event_type"
+    t.string "event_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "event_type"
@@ -36,6 +49,94 @@ ActiveRecord::Schema.define(version: 2021_03_02_193608) do
     t.string "group_id"
     t.string "location_type"
     t.string "location_id"
+  end
+
+  create_table "group_people", force: :cascade do |t|
+    t.string "gp_type"
+    t.string "gp_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "permission"
+    t.string "phone_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "group_types", force: :cascade do |t|
+    t.string "grouptype_type"
+    t.string "grouptype_id"
+    t.string "church_center_visable"
+    t.string "church_center_map_visable"
+    t.string "color"
+    t.string "default_group_settings"
+    t.string "name"
+    t.string "position"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "type"
+    t.string "group_id"
+    t.string "achived_at"
+    t.string "contact_email"
+    t.string "description"
+    t.string "enrollment_open"
+    t.string "enrollment_strategy"
+    t.string "location_type_preference"
+    t.string "memberships_count"
+    t.string "name"
+    t.string "public_church_center_web_url"
+    t.string "schedule"
+    t.string "virual_location_url"
+    t.string "group_type"
+    t.string "group_type_id"
+    t.string "location_type"
+    t.string "location_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "location_type"
+    t.string "location_id"
+    t.string "display_preference"
+    t.string "full_formatted_address"
+    t.string "latitude"
+    t.string "longitude"
+    t.string "name"
+    t.string "radius"
+    t.string "strategy"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.string "membership_type"
+    t.string "membership_id"
+    t.string "account_center_identifier"
+    t.string "avatar_url"
+    t.string "color_identifier"
+    t.string "email_address"
+    t.string "first_name"
+    t.string "joined_at"
+    t.string "last_name"
+    t.string "phone_number"
+    t.string "role"
+    t.string "group_type"
+    t.string "group_id"
+    t.string "person_type"
+    t.string "person_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "organ_type"
+    t.string "organ_id"
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "people", force: :cascade do |t|
@@ -134,6 +235,42 @@ ActiveRecord::Schema.define(version: 2021_03_02_193608) do
     t.string "covid_19_left_voicemail"
     t.string "covid_19_status_during_pandemic"
     t.string "covid_19_follow_up_needed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string "res_type"
+    t.string "res_id"
+    t.string "description"
+    t.string "last_updated"
+    t.string "name"
+    t.string "type"
+    t.string "visibility"
+    t.string "relationship_type"
+    t.string "relationship_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tag_groups", force: :cascade do |t|
+    t.string "taggroup_type"
+    t.string "taggroup_id"
+    t.string "name"
+    t.string "position"
+    t.string "display_publicly"
+    t.string "multiple_options_enabled"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_type"
+    t.string "tag_id"
+    t.string "name"
+    t.string "postion"
+    t.string "tag_group_type"
+    t.string "tag_group_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
