@@ -11,7 +11,7 @@ group_event =
   api.groups.v2.group_types.get
 
 
-*** Event DB - Group Event 
+*** Event DB - Group Event
 
 group_event.each_with_index do |sub_group, index|
    if index == 1
@@ -47,6 +47,42 @@ group_event.each_with_index do |sub_group, index|
            db.save
          end
        end
+     end
+   end
+ end
+
+ ***** Group DB
+ group_event.each_with_index do |sub_group, index|
+   if index == 1
+     sub_group.each_with_index do |val, i|
+     if i == 1
+       val.each do |cuts|
+       db = Group.new
+        db.type = cuts['type']
+        db.group_id =  cuts['id']
+        db.achived_at = cuts['attributes']['archived_at']
+        db.contact_email =  cuts['attributes']['contact_email']
+        db.description = cuts['attributes']['description']
+        db.enrollment_open = cuts['attributes']['enrollment_open']
+        db.enrollment_strategy = cuts['attributes']['enrollment_strategy']
+        db.location_type_preference = cuts['attributes']['location_type_preference']
+        db.memberships_count = cuts['attributes']['memberships_count']
+        db.name = cuts['attributes']['name']
+        db.public_church_center_web_url =  cuts['attributes']['public_church_center_web_url']
+        db.schedule = cuts['attributes']['schedule']
+        db.virual_location_url = cuts['attributes']['virtual_location_url']
+
+        if cuts['relationships']['group_type']['data'] != nil
+          db.group_type =  cuts['relationships']['group_type']['data']['type']
+          db.group_type_id = cuts['relationships']['group_type']['data']['id']
+        end
+        if cuts['relationships']['location']['data'] != nil
+          db.location_type = cuts['relationships']['location']['data']['type']
+          db.location_id =  cuts['relationships']['location']['data']['id']
+        end
+        db.save
+       end
+      end
      end
    end
  end
