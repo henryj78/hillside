@@ -8,8 +8,9 @@ api.people.v2.people.get(order: 'last_name')
 group_event =
   api.groups.v2.events.get
   api.groups.v2.groups.get
+  api.groups.v2.get (organization)
   api.groups.v2.group_types.get
-
+  api.groups.v2.people.get
 
 *** Event DB - Group Event
 
@@ -86,3 +87,79 @@ group_event.each_with_index do |sub_group, index|
      end
    end
  end
+
+ ****** Group Types
+  group_event.each_with_index do |sub_group, index|
+   if index == 1
+     sub_group.each_with_index do |val, i|
+        if i == 1
+          val.each do |cuts|
+          db = GroupType.new
+          db.grouptype_type = cuts['type']
+          db.grouptype_id =  cuts['id']
+          db.church_center_map_visable =  cuts['attributes']['church_center_map_visible']
+          db.church_center_visable = cuts['attributes']['church_center_visible']
+          db.color = cuts['attributes']['color']   
+          db.default_group_settings = cuts['attributes']['default_group_settings']
+          p cuts['attributes']['description']
+          db.name = cuts['attributes']['name']
+          db.position =  cuts['attributes']['position']
+          db.save
+          end
+       end
+     end
+   end
+  end
+
+  ****** Group organizations
+  group_event.each_with_index do |sub_group, index|
+   if index == 0
+     sub_group.each do |x|
+       db = Organization.new
+       db.organ_type = x['type']
+       db.organ_id = x['id']
+       db.name = x['attributes']
+       db.save
+     end
+   end
+ end
+
+********* Person
+ group_event.each_with_index do |sub_group, index|
+   if index == 1
+     sub_group.each_with_index do |val, i|
+       if i == 1
+         val.each do |subx|
+           db = GroupPerson.new
+           db.gp_type =  subx['type']
+           db.gp_id = subx['id']
+           db.first_name =  subx['attributes']['first_name']
+           db.last_name =  subx['attributes']['last_name']
+           db.permission =  subx['attributes']['permission']
+           db.phone_number =  subx['attributes']['phone_number']
+           db.save
+         end
+       end
+     end
+   end
+ end
+
+****** TagGroup
+group_event.each_with_index do |sub_group, index|
+  if index == 1
+    sub_group.each_with_index do |val, i|
+      if i == 1
+        val.each do |subx|
+          db = TagGroup.new
+          db.taggroup_type =  subx['type']
+          db.taggroup_id =  subx['id']
+          db.name =  subx['attributes']['name']
+          db.position =  subx['attributes']['position']
+          db.display_publicly =  subx['attributes']['display_publicly']
+          db.multiple_options_enabled =  subx['attributes']['multiple_options_enabled']
+          db.save
+        end
+      end
+    end
+  end
+end
